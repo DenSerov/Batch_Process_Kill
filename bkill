@@ -1,0 +1,8 @@
+if [[ $# -eq 0 ]]; then echo 'Specify keyword'; exit 1; fi
+for i in {1..7}
+do
+  echo Kill $1 $i
+  ps -x | grep "$1" | grep -v grep |  sed 's/^ *//'  
+  ps -x | grep "$1" | grep -v grep |  sed 's/^ *//'| cut -d " " -f1 | while IFS= read -r PROCESS; do kill -9 $PROCESS; done
+  sleep 2
+done
